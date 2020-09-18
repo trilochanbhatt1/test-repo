@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Test</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript">
+$(document).ready(function(){
+var images={};
+var myHtmlDiv="";
+fetch('https://jsonplaceholder.typicode.com/photos/')
+.then(response => response.json())
+.then(data => {
+  var i;
+  for (i = 1; i < 10; i++) {
+        var _$image_url = data[i]['url'];
+        var _$title = data[i]['title'];
+        myHtmlDiv += '<div class="col-md-4"><span class="badge badge-danger float-right">Delete</span><img class="card-img"  style="height: 225px; width: 100%; display: block;" src='+ _$image_url+'><div class="card-body"><h4><a href="">Project Name '+i+'</a></h4><p class="card-text">'+_$title+'</p></div></div>';
+      }
+      $("#myphotolist").html(myHtmlDiv);
+        $("#myphotolist").on("click",".badge-danger", function(){
+          $(this).parent().remove();
+      });  
+    })
+    });
+  </script>
+</head>
+<body>
+  <header>
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+         &nbsp;
+        </div>
+      </div>
+    </header>
+    <div class="container">
+        <div class="mt-5">
+          <span style="font-size: 30px;">Page Heading</span>
+          <span>Secondary Text</span>
+        </div>
+        </br>
+        <div id="myphotolist" class="row"></div>
+      </div>
+</body>
+</html>
